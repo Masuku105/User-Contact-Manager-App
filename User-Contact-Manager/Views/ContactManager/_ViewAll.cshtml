@@ -1,0 +1,83 @@
+﻿@model IEnumerable<User_Contact_Manager.Models.ContactViewModel>
+
+<div class="col-md-12">
+
+    <h1 class="text-center"><i class="fas fa-comments-dollar text-success"></i> Contacts</h1>
+
+    @if (Model.Count() == 0)
+    {
+        <div class="container">
+            <div class="row col-md-12 p-lg-4">
+               
+                <div class="col-md-12 text-end p-0">
+                    <a onclick="showInPopup('@Url.Action("AddOrEdit","ContactManager",null,Context.Request.Scheme)','New Contact')" class="btn btn-success text-white"><i class="fas fa-user-plus"></i> New Contact</a>
+                </div>
+
+            </div>
+            <div class="row col-md-12  p-lg-4 text-start bg-warning text-muted rounded">
+                <h2>No Contacts Found!</h2>
+                <p>You dont have any contacts, click on the new contact button to start adding contacts</p>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Company)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Notes)
+                    </th>
+                    <th>
+                        <a onclick="showInPopup('@Url.Action("AddOrEdit","ContactManager",null,Context.Request.Scheme)','New Contact')" class="btn btn-success text-white"><i class="fas fa-user-plus"></i> New Contact</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Company)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Notes)
+                        </td>
+                        <td>
+                            <div>
+                                <a onclick="showInPopup('@Url.Action("AddOrEdit","ContactManager",new {id=item.Id},Context.Request.Scheme)','Update Contact')" class="btn btn-primary text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                <form asp-action="Delete" asp-route-id="@item.Id" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                                    <input type="hidden" asp-for="@item.Id" />
+                                    <input type="submit" value="Delete" class="btn btn-danger" />
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>

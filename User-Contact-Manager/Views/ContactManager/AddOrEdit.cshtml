@@ -1,0 +1,64 @@
+﻿@model User_Contact_Manager.Models.ContactViewModel
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.Id" onsubmit="return jQueryAjaxPost(this);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+
+                        <input asp-for="Name" class="form-control" />
+
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Phone" class="control-label"></label>
+                        <input asp-for="Phone" class="form-control" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Company" class="control-label"></label>
+                        <input asp-for="Company" class="form-control" />
+                        <span asp-validation-for="Company" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Notes" class="control-label"></label>
+                        <input asp-for="Notes" class="form-control" />
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="col-md-12 py-2 pt-4 text-end">
+                    <a class="btn btn-danger" asp-area="" asp-controller="ContactManager" asp-action="Index">Cancel</a>
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </form>
+    </div>
+
